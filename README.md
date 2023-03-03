@@ -37,12 +37,9 @@ baked goods.
 THE BUSINESS NEED
 The owner of Bean and Brew wants a digital
 solution developed to:
-5. Book a space at one of the 3 local
-restaurants (Harrogate, Leeds,
-Knaresborough Castle)
+5. Book a space at one of the 3 local restaurants (Harrogate, Leeds, Knaresborough Castle)
 6. Be able to pre-order a coffee for collection
-7. Allow customers to pre-book (online)
-baking lessons
+7. Allow customers to pre-book (online) baking lessons
 
 
 The client has carried out some market
@@ -53,7 +50,6 @@ The research identified the following:
 
 8. Pre-order baked goods for collection
 9. Customisable baked goods hampers
-10. Creating customer accounts to speed up
-re-ordering
+10. Creating customer accounts to speed up re-ordering
 11. Social media posting/sharing features
 (‘Rate my cake’)
