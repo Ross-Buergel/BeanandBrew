@@ -5,6 +5,7 @@ include('../includes/header.php');
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     require('../includes/connect_db.php');
     require("../includes/validation-functions.php");
+
     $errors = array();
 
     if ($error = check_presence("first name", $_POST["first_name"])) {
@@ -96,33 +97,39 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <br>
         <div class="divider"></div>
         <h1 class="standard-box-title">Register</h1>
+
+        <?php
+        if (isset($errors) && !empty($errors)) {
+            echo "<h2 class = 'standard-box-text' id = 'err_msg'>Oops! There was a problem </h2><br>";
+            foreach ($errors as $msg) {
+                echo "<p id = 'err-msg'> - $msg</p><br>";
+            }
+            echo "<h2>Please try again or <a href='register.php' >Register</a></h2>";
+        }
+        ?>
         <form class="centre-content" action="../User-Accounts/register.php" method="POST">
             <div class="divider"></div>
-            <p class="standard-box-text">
-                First Name <br> <input type="text" name="first_name" value="<?php if (isset($_POST['first_name']))
-                                                                                echo $_POST['first_name'] ?>">
-            </p>
-            <p class=standard-box-text>
-                Last Name <br> <input type="text" name="last_name" value="<?php if (isset($_POST['last_name']))
-                                                                                echo $_POST['last_name'] ?>">
-            </p>
+
+            <label for="first_name">First Name:</label><br>
+            <input type="text" name="first_name" value="<?php if (isset($_POST['first_name']))
+                                                            echo $_POST['first_name'] ?>">
+
+            <label for="last_name">Last Name:</label><br>
+            <input type="text" name="last_name" value="<?php if (isset($_POST['last_name']))
+                                                            echo $_POST['last_name'] ?>">
             <br>
-            <p class="standard-box-text">
-                Email <br> <input type="text" name="email" value="<?php if (isset($_POST['email']))
-                                                                        echo $_POST['email'] ?>">
-            </p>
+            <label for="email">Email:</label><br>
+            <input type="text" name="email" value="<?php if (isset($_POST['email']))
+                                                        echo $_POST['email'] ?>">
+
             <br>
-            <p class="standard-box-text">
-                Password <br> <input type="password" name="password" value="<?php if (isset($_POST['password']))
-                                                                                echo $_POST['password'] ?>">
-            </p>
-            <p class="standard-box-text">
-                Confirm Password <br> <input type="password" name="confirm_password" value="<?php if (isset($_POST['confirm_password']))
-                                                                                                echo $_POST['confirm_password'] ?>">
-            </p>
-            <p>
-                <input class="submit-button" type="submit" value="Register">
-            </p>
+            <label for="password">Password:</label><br>
+            <input type="password" name="password" value="<?php if (isset($_POST['password']))
+                                                                echo $_POST['password'] ?>">
+            <label for="confirm_password">Confirm Password:</label><br>
+            <input type="password" name="confirm_password" value="<?php if (isset($_POST['confirm_password']))
+                                                                        echo $_POST['confirm_password'] ?>">
+            <input class="submit-button" type="submit" value="Register">
             <div class="divider"></div>
         </form>
     </div>

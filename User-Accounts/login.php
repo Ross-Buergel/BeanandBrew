@@ -78,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
             if (isset($errors) && !empty($errors)) {
                 echo "<h2 class = 'standard-box-text' id = 'err_msg'>Oops! There was a problem </h2><br>";
                 foreach ($errors as $msg) {
-                    echo "<p> - $msg</p><br>";
+                    echo "<p id = 'err-msg'> - $msg</p><br>";
                 }
                 echo "<h2>Please try again or <a href='register.php' >Register</a></h2>";
             }
