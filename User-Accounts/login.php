@@ -8,21 +8,27 @@ include("../includes/connect_db.php");
 if ($_SERVER['REQUEST_METHOD'] == "POST"){
     $errors = [];
 
-    if ($var = check_presence("email", $_POST["email"])) {
-        $errors[] = $var;
+
+    if ($error = check_presence("pass", $_POST["pass"])) {
+        $errors[] = $error;
     }
 
-    if ($var = check_presence("pass", $_POST["pass"])) {
-        $errors[] = $var;
+    if ($error = check_length("pass", $_POST["pass"], 5, 48)) {
+        $errors[] = $error;
     }
 
 
-    if ($var = check_length("pass", $_POST["pass"], 5, 48)) {
-        $errors[] = $var;
+    if ($error = check_presence("email", $_POST["email"])) {
+        $errors[] = $error;
     }
 
-    if ($var = check_length("email", $_POST["email"], 4, 255)) {
-        $errors[] = $var;
+
+    if ($error = check_length("email", $_POST["email"], 4, 255)) {
+        $errors[] = $error;
+    }
+
+    if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+        $errors[] = 'Enter a valid email';
     }
 
 
