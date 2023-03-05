@@ -1,16 +1,21 @@
 <?php
-$page_title = 'Checkout';
+$page_title = 'Booking Confirmation';
 include('../includes/header.php');
-if (isset($_GET['id'])) 
-{
+if (isset($_GET['id'])) {
     $id = $_GET['id'];
 }
 
 require('../includes/connect_db.php');
-$q = "INSERT INTO tbl_lesson_bookings(lesson_id,user_id)
-VALUES (".$id.",".$_SESSION['user_id'].")";
-$r = mysqli_query($dbc,$q);
-echo'<div class = "standard-box"><div class = "centre-content"><h1 class = "standard-box-title">
-Booking Confirmed</h1></div></div>';
+$booking_query = "INSERT INTO tbl_lesson_bookings(lesson_id,user_id)
+VALUES (" . $id . "," . $_SESSION['user_id'] . ")";
+$booking = mysqli_query($dbc, $booking_query);
+?>
+
+<div class="standard-box">
+    <div class="centre-content">
+        <h1 class="standard-box-title">Booking Confirmed</h1>
+    </div>
+</div>';
+<?php
 include('../includes/footer.html');
 ?>

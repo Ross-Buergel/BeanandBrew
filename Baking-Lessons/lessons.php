@@ -1,40 +1,47 @@
 <?php
-$page_title = 'Lessons';   
+$page_title = 'Lessons';
 include('../includes/tall-header.php');
 
-if (!isset($_SESSION['user_id']))
-{
+if (!isset($_SESSION['user_id'])) {
     header("Location: ../User-Accounts/login.php");
 }
 
 require('../includes/connect_db.php');
+?>
 
+<div class="standard-box">
+    <div class="centre-content">
+        <br>
+        <div class="divider"></div>
+        <h1 class="standard-box-title">Lessons</h1>
+        <div class="divider"></div>
 
-echo'<div class = "standard-box"><div class = "centre-content">
-<br>
-<div class = "divider"></div>
-<h1 class = "standard-box-title">Lessons</h1>
-<div class = "divider"></div>
-';
+        <?php
+        $lessons_query = "SELECT * FROM tbl_lessons";
+        $lessons = mysqli_query($dbc, $lessons_query);
 
-$q = "SELECT * FROM tbl_lessons";
-$r = mysqli_query($dbc,$q);
-if(mysqli_num_rows($r) > 0)
-{
-    while($row = mysqli_fetch_array($r,MYSQLI_ASSOC))
-    {
-        echo '<p class = "standard-box-text" style = "margin-left:250px;margin-right:250px;"><strong>'.$row['name'].
-        '</strong><br>'.$row['summary'].
-        '<br><button class = "submit-button"><a href="view-more.php?id='.$row['lesson_id'].
-        '" class = "standard-box-text" style = "text-decoration:none;">View More</a></button></p>
-        <div class = "divider"></div>';
-    }
-    mysqli_close($dbc);
-}
-else
-{
-    echo'<h1 class = "standard-box-title">There are currently no lessons available</h1>';
-}
-echo'</div></div>';
+        if (mysqli_num_rows($r) > 0) :
+            while ($lessons_array = mysqli_fetch_array($lessons, MYSQLI_ASSOC)) :
+            ?>
+                <p class="standard-box-text" style="margin-left:250px;margin-right:250px;"><strong><?php echo $row['name'] ?>
+                    </strong><br><?php echo $lessons_array['summary'] ?><br>
+                    <button class="submit-button"><a href="view-more.php?id='<?php echo $row['lesson_id'] ?>
+                    '" class="standard-box-text" style="text-decoration:none;">View More</a></button>
+                </p>
+
+                <div class="divider"></div>';
+            <?php
+            endwhile;
+            mysqli_close($dbc);
+        else :
+            ?>
+            <h1 class="standard-box-title">There are currently no lessons available</h1>
+        <?php
+        endif;
+        ?>
+    </div>
+</div>
+
+<?php
 include('../includes/footer.html');
 ?>
