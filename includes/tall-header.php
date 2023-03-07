@@ -17,13 +17,8 @@
         <ul>
           <li><a class = "create-line" href="/BeanandBrew/index.php">Home</a></li>
           <li><a class = "create-line" href="/BeanandBrew/Preorder/shop.php">Pre-Order</a></li>
-          <li class="dropdown">
-            <a href="javascript:void(0)" class="dropbtn">Reviews</a>
-            <div class="dropdown-content">
-            <a class = "create-line-dropdown" href="/BeanandBrew/rate-my-cake/view-reviews.php">View Reviews</a>
-            <a class = "create-line-dropdown" href="/BeanandBrew/rate-my-cake/reviews.php">Leave a Review</a>
-            </div>
-          </li>
+          <li><a class="create-line" href="/BeanandBrew/rate-my-cake/reviews.php">Reviews</a></li>
+          
           <li class="dropdown">
             <a href="javascript:void(0)" class="dropbtn">Booking</a>
             <div class="dropdown-content">

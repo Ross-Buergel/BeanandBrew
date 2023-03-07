@@ -79,12 +79,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
             ?>
 
+            <br>
             <label for="location">Location:</label><br>
             <select name="location">
                 <option value="Harrogate">Harrogate</option>
                 <option value="Leeds">Leeds</option>
                 <option value="Knaresborough Castle">Knaresborough Castle</option>
-            </select>
+            </select><br><br>
 
             <label for="time">Time:</label><br>
             <select name="time">
@@ -103,11 +104,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <option value="15:00">15:00</option>
                 <option value="15:30">15:30</option>
                 <option value="16:00">16:00</option>
-            </select>
+            </select><br><br>
 
 
             <label for="date">Date:</label><br>
-            <input name="date" type="date" style="text-align:center"></input>
+            <input name="date" type="date" style="text-align:center"><br><br>
 
             <label for="people">Number of People:</label><br>
             <select name="people">
@@ -115,9 +116,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="4">4</option>
-            </select>
+            </select><br><br>
 
-            <input type="submit" value="Submit" class="submit-button">
+            <input type="submit" value="Submit" class="submit-button"><br><br>
             <div class="divider"></div>
         </form>
     </div>

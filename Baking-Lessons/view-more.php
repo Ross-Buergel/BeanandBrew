@@ -22,14 +22,15 @@ $row = mysqli_fetch_array($r, MYSQLI_ASSOC);
         <p class="standard-box-text"><br><?php echo $row['text'] ?></p>
         <p class="standard-box-text"><br><?php echo $row['date'] . ' at ' . $row['time'] ?></p>
 
+        <button class="submit-button">
+            <a href="./lessons.php" class="standard-box-text" style="text-decoration:none">Back to Lessons</a>
+        </button><br><br>
 
-
-        <button class="submit-button"><a href="/Baking-Lessons/lessons.php" class="standard-box-text" style="text-decoration:none">Back to Lessons</a>
-
-        </button><br><br><button class="submit-button"><a href="booking.php?id=<?php echo $row['lesson_id']?>"
-        class="standard-box-text" style="text-decoration:none;">Book</a></button>
+        <button class="submit-button">
+            <a href="booking.php?id=<?php echo $row['lesson_id'] ?>" class="standard-box-text" style="text-decoration:none;">Book</a>
+        </button>
     </div>
-</div>';
+</div>
 
 <?php
 mysqli_close($dbc);

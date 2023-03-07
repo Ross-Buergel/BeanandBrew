@@ -37,18 +37,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($error = check_presence("rating", $_POST["rating"])) {
         $errors[] = $error;
     }
-    
+
     if ($_POST['rating'] > 5 or $_POST['rating'] < 1) {
         $errors[] = 'Invalid Rating';
     }
 
     if (empty($errors)) {
         $leave_review_query = "INSERT INTO tbl_reviews(user_id,location,cake,text,rating)
-        VALUES ('".$_SESSION['user_id']."','".
-        $_POST['location']."','".
-        $_POST['cake']."','".
-        $_POST['review']."','".
-        $_POST['rating']."')";
+        VALUES ('" . $_SESSION['user_id'] . "','" .
+            $_POST['location'] . "','" .
+            $_POST['cake'] . "','" .
+            $_POST['review'] . "','" .
+            $_POST['rating'] . "')";
 
         $leave_review = mysqli_query($dbc, $leave_review_query);
         header("Location: /reviews.php");
@@ -65,8 +65,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <h1 class="standard-box-title">Reviews</h1><br>
         <div class="divider"></div>
 
-        <?php if (isset($_SESSION["user_id"])) : 
-            
+        <?php if (isset($_SESSION["user_id"])) :
+
             if (isset($errors) && !empty($errors)) {
                 echo "<h2 class = 'standard-box-text' id = 'err_msg'>Oops! There was a problem </h2><br>";
                 foreach ($errors as $msg) {
@@ -74,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 }
                 echo "<h2>Please try again or <a href='register.php' >Register</a></h2>";
             }
-            ?>
+        ?>
             <form class="centre-content" action="/rate-my-cake/reviews.php" method="POST">
 
                 <label for="location">Location:</label> <br>
@@ -82,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <option value="Leeds">Leeds</option>
                     <option value="Knaresborough Castle">Knaresborough Castle</option>
                     <option value="Harrogate">Harrogate</option>
-                </select>
+                </select><br>
 
                 <label for="cake">Cake:</label><br>
                 <select name="cake">
@@ -95,10 +95,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             "</option>";
                     }
                     ?>
-                </select>
+                </select><br>
 
                 <label for="review">Review:</label> <br>
-                <textarea name="review" rows="4" cols="50" placeholder="What is your review (max 250 characters)" style="resize: none;"></textarea>
+                <textarea name="review" rows="4" cols="50" placeholder="What is your review (max 250 characters)" 
+                style="resize: none;"></textarea><br>
 
                 <label for="rating">Rating:</label><br>
                 <select name="rating">
@@ -107,7 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <option value="3">3</option>
                     <option value="4">4</option>
                     <option value="5">5</option>
-                </select>
+                </select><br>
 
                 <input type="submit" value="Submit" class="submit-button">
             </form>
