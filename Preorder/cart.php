@@ -8,7 +8,7 @@ if (!isset($_SESSION['user_id'])) {
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     foreach ($_POST['qty'] as $item_id => $item_qty) {
-        $id = (int)$item_id;
+        $id = (int) $item_id;
         $qty = (int)$item_qty;
 
         if ($qty == 0) {
@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             require('../includes/connect_db.php');
             $q = "SELECT * FROM tbl_shop WHERE item_id IN (";
             foreach ($_SESSION['cart'] as $id => $value) {
-                $q .= $id . ',';
+                $q .= $id . ",";
             }
             $q = substr($q, 0, -1) . ") ORDER BY item_id ASC";
             $r = mysqli_query($dbc, $q);
@@ -48,15 +48,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             $subtotal = $_SESSION['cart'][$row['item_id']]['quantity']
                                 * $_SESSION['cart'][$row['item_id']]['price'];
                             $total += $subtotal;
-
                         ?>
-                            <div class='centre-content'>
                     <tr>
                         <td class='standard-box-text'><?php echo $row['item_id'] ?></td>
                         <td class='standard-box-text'><?php echo $row['item_name'] ?></td>
                         <td class='standard-box-text'>
-                            <input type="text" size="3" name="qty[<?php echo $row['item_id'] ?>]" 
-                            value="<?php echo $_SESSION['cart'][$row['item_id']]['quantity'] ?>">
+                            <input type="text" size="3" name="qty[<?php echo $row['item_id'] ?>]" value="<?php echo $_SESSION['cart'][$row['item_id']]['quantity'] ?>">
                         </td>
                         <td class='standard-box-text'><?php echo $row['item_price'] ?> = </td>
                         <td class='standard-box-text'><?php echo number_format($subtotal, 2) ?></td>

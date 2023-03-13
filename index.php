@@ -4,7 +4,6 @@ $page_title = 'Home';
 include('../BeanandBrew/includes/header.php');
 if (!isset($_SESSION['user_id']))
 {
-    require('../BeanandBrew/User-Accounts/login_tools.php');
 
     echo'
     <div class = "standard-box">

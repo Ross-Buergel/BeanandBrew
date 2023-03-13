@@ -9,7 +9,7 @@ if (!isset($_SESSION['user_id'])) {
 require("../includes/connect_db.php");
 require("../includes/validation-functions.php");
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['cart'])) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['cart']) && isset($_POST['location'])) :
     $total = $_POST['total'];
 
     $cart_items_query = "SELECT * FROM tbl_shop WHERE item_id IN (";
@@ -40,13 +40,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['cart'])) {
     }
 
     if (empty($errors)) {
-        while ($row = mysqli_fetch_array($r1, MYSQLI_ASSOC)) {
-            $q = "INSERT INTO tbl_orders(user_id,total,order_date,collection_date,collection_time) VALUES('"
-                . $_SESSION['user_id'] . "','" . $_POST['total'] . "',NOW(),'" . $_POST['date'] . "','" . $_POST['time'] . "')";
-            $r = mysqli_query($dbc, $q);
+        $q = "INSERT INTO tbl_orders(user_id,total,order_date,collection_date,collection_time) VALUES('"
+            . $_SESSION['user_id'] . "','" . $_POST['total'] . "',NOW(),'" . $_POST['date'] . "','" . $_POST['time'] . "')";
+        $r = mysqli_query($dbc, $q);
 
-            $order_id = mysqli_insert_id($dbc);
-
+        $order_id = mysqli_insert_id($dbc);
+        
+        while ($row = mysqli_fetch_array($cart_items, MYSQLI_ASSOC)) {
             $collection = $_POST['date'] . ", " . $_POST['time'];
             $query = "INSERT INTO tbl_order_contents(order_id,item_id,user_id,quantity,price,location)
             VALUES ('" . $order_id . "','" .
@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['cart'])) {
                 $_SESSION['user_id'] . "','" .
                 $_SESSION['cart'][$row['item_id']]['quantity'] . "','" .
                 $_SESSION['cart'][$row['item_id']]['price'] . "','" .
-                $l . "')";
+                $_POST['location'] . "')";
 
             $result = mysqli_query($dbc, $query);
         }
@@ -88,84 +88,79 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['cart'])) {
         echo "Please <a href='cart.php' >Try Again</a></p></div></div>";
     }
     $_SESSION['cart'] = NULL;
-}
-
-
-
-
-if (isset($_POST['total']) && ($_POST['total'] > 0) && (!empty($_SESSION['cart']))) : ?>
-    <div class="standard-box">
-        <div>
-            <form class="centre-content" action="../Preorder/checkout.php" method="POST">
-                <label for="time">Time:</label><br>
-                <select name="time">
-                    <option value="09:00">9:00</option>
-                    <option value="09:30">9:30</option>
-                    <option value="10:00">10:00</option>
-                    <option value="10:30">10:30</option>
-                    <option value="11:00">11:00</option>
-                    <option value="11:30">11:30</option>
-                    <option value="12:00">12:00</option>
-                    <option value="12:30">12:30</option>
-                    <option value="13:00">13:00</option>
-                    <option value="13:30">13:30</option>
-                    <option value="14:00">14:00</option>
-                    <option value="14:30">14:30</option>
-                    <option value="15:00">15:00</option>
-                    <option value="15:30">15:30</option>
-                    <option value="16:00">16:00</option>
-                </select>
-
-                <label for="date">Date:</label><br>
-                <input name="date" type="date" placeholder="DD-MM-YYYY" style="text-align:center"></input>
-
-                <label for="location">Location:</label><br>
-                <select name="location">
-                    <option value="Harrogate">Harrogate</option>
-                    <option value="Leeds">Leeds</option>
-                    <option value="Knaresborough Castle">Knaresborough Castle</option>
-                </select>
-
-                <input type="hidden" name="total" value="<?php echo $_POST['total'] ?>">
-                <?php
-
-                if (isset($_POST['hamper'])) {
-                    $hamper = $_POST['hamper'];
-                    echo '<input type = "hidden" name="hamper" value="' . $hamper . '">';
-                } else {
-                    $hamper = "";
-                }
-
-                if ($hamper == "True") :
-                ?>
-                    <p class="standard-box-text">
-                        Name<br>
-                        <input name="name" type="text" placeholder="Name on card" style="text-align:center"></input>
-                    </p>
-                    <p class="standard-box-text">
-                        Message <br>
-                        <textarea name="text" rows="4" cols="50" placeholder="What is your message (max 250 characters)" style="resize: none;"></textarea>
-                    </p>
-                    <input type="submit" value="Submit" class="submit-button">
-                <?php
-                else :
-                ?>
-                    <input type="submit" value="Submit" class="submit-button">
-                <?php
-                endif;
-                ?>
-            </form>
-        </div>
-    </div>
-<?php
 else :
-?>
-    <div class="standard-box">
-        <div class="centre-content">
-            <h1 class="standard-box-title">There are no items in your cart</h1>
+
+    if (isset($_POST['total']) && ($_POST['total'] > 0) && (!empty($_SESSION['cart']))) : ?>
+        <div class="standard-box">
+            <div>
+                <form class="centre-content" action="../Preorder/checkout.php" method="POST">
+                    <label for="time">Time:</label><br>
+                    <select name="time">
+                        <option value="09:00">9:00</option>
+                        <option value="09:30">9:30</option>
+                        <option value="10:00">10:00</option>
+                        <option value="10:30">10:30</option>
+                        <option value="11:00">11:00</option>
+                        <option value="11:30">11:30</option>
+                        <option value="12:00">12:00</option>
+                        <option value="12:30">12:30</option>
+                        <option value="13:00">13:00</option>
+                        <option value="13:30">13:30</option>
+                        <option value="14:00">14:00</option>
+                        <option value="14:30">14:30</option>
+                        <option value="15:00">15:00</option>
+                        <option value="15:30">15:30</option>
+                        <option value="16:00">16:00</option>
+                    </select><br><br>
+
+                    <label for="date">Date:</label><br>
+                    <input name="date" type="date" placeholder="DD-MM-YYYY" style="text-align:center"><br><br>
+
+                    <label for="location">Location:</label><br>
+                    <select name="location">
+                        <option value="Harrogate">Harrogate</option>
+                        <option value="Leeds">Leeds</option>
+                        <option value="Knaresborough Castle">Knaresborough Castle</option>
+                    </select><br><br>
+
+                    <input type="hidden" name="total" value="<?php echo $_POST['total'] ?>">
+                    <?php
+
+                    if (isset($_POST['hamper'])) {
+                        $hamper = $_POST['hamper'];
+                        echo '<input type = "hidden" name="hamper" value="' . $hamper . '">';
+                    } else {
+                        $hamper = "";
+                    }
+
+                    if ($hamper == "True") :
+                    ?>
+                        <p class="standard-box-text">
+                            Name<br>
+                            <input name="name" type="text" placeholder="Name on card" style="text-align:center">
+                        </p>
+                        <p class="standard-box-text">
+                            Message <br>
+                            <textarea name="text" rows="4" cols="50" placeholder="What is your message (max 250 characters)" style="resize: none;"></textarea>
+                        </p>
+
+                    <?php
+                    endif;
+                    ?>
+                    <input type="submit" value="Submit" class="submit-button">
+                </form>
+            </div>
         </div>
-    </div>';
+    <?php
+    else :
+    ?>
+        <div class="standard-box">
+            <div class="centre-content">
+                <h1 class="standard-box-title">There are no items in your cart</h1>
+            </div>
+        </div>
 <?php
+    endif;
 endif;
 include('../includes/footer.html');
 ?>
