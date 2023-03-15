@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <form class="centre-content" action="/Booking/booking.php" method="POST">
             <br>
             <div class="divider"></div>
-            <h1 class="standard-box-title">Booking</h1>
+            <h1>Booking</h1>
             <div class="divider"></div>
 
             <?php

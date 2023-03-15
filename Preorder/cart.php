@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         ?>
 
             <form class="centre-content" action="../Preorder/cart.php" method="POST"><br>
-                <h1 class="standard-box-title">Cart</h1>
+                <h1>Cart</h1>
                 <table style="margin-left:auto;margin-right:auto;">
                     <tr>
                         <th colspan="5" class="standard-box-text">Items in your cart</th>
@@ -73,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             mysqli_close($dbc);
         else :
         ?>
-            <h2 class="standard-box-title">Your cart is currently empty</h2>
+            <h2>Your cart is currently empty</h2>
         <?php
         endif;
         ?>

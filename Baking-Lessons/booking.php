@@ -13,7 +13,7 @@ $booking = mysqli_query($dbc, $booking_query);
 
 <div class="standard-box">
     <div class="centre-content">
-        <h1 class="standard-box-title">Booking Confirmed</h1>
+        <h1>Booking Confirmed</h1>
     </div>
 </div>';
 <?php

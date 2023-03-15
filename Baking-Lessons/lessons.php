@@ -1,6 +1,6 @@
 <?php
 $page_title = 'Lessons';
-include('../includes/tall-header.php');
+include('../includes/header.php');
 
 if (!isset($_SESSION['user_id'])) {
     header("Location: ../User-Accounts/login.php");
@@ -13,7 +13,7 @@ require('../includes/connect_db.php');
     <div class="centre-content">
         <br>
         <div class="divider"></div>
-        <h1 class="standard-box-title">Lessons</h1>
+        <h1>Lessons</h1>
         <div class="divider"></div>
 
         <?php
@@ -39,7 +39,7 @@ require('../includes/connect_db.php');
             mysqli_close($dbc);
         else :
             ?>
-            <h2 class="standard-box-title">There are currently no lessons available</h2>
+            <h2>There are currently no lessons available</h2>
         <?php
         endif;
         ?>

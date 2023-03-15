@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div class="divider"></div>
 
 
-        <h1 class="standard-box-title">Reviews</h1><br>
+        <h1>Reviews</h1><br>
         <div class="divider"></div>
 
         <?php if (isset($_SESSION["user_id"])) :

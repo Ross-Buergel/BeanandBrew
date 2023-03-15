@@ -23,13 +23,13 @@ $r = mysqli_query($dbc, $q);
             if (isset($_SESSION['cart'][$id])) {
                 $_SESSION['cart'][$id]['quantity']++;
         ?>
-                <h1 class="standard-box-title">Another <?php $row["item_name"] ?> has been added to your cart</h1>
+                <h1>Another <?php $row["item_name"] ?> has been added to your cart</h1>
 
             <?php
             }else{
                 $_SESSION['cart'][$id] = array('quantity' => 1, 'price' => $row['item_price']);
             ?>
-                <h1 class="standard-box-title">A <?php echo $row["item_name"] ?> has been added to your cart</h1>
+                <h1>A <?php echo $row["item_name"] ?> has been added to your cart</h1>
             <?php
             }
             ?>

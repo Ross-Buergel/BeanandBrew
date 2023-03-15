@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
         <form class="centre-content" action="login.php" method="POST">
             <br>
             <div class="divider"></div>
-            <h1 class="standard-box-title">Login</h1>
+            <h1>Login</h1>
             <div class="divider"></div><br>
 
             <?php

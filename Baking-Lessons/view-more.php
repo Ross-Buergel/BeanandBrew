@@ -18,7 +18,7 @@ $row = mysqli_fetch_array($r, MYSQLI_ASSOC);
 
 <div class="standard-box">
     <div class="centre-content">
-        <h1 class="standard-box-title"><?php echo $row['name'] ?></h1>
+        <h1><?php echo $row['name'] ?></h1>
         <p class="standard-box-text"><br><?php echo $row['text'] ?></p>
         <p class="standard-box-text"><br><?php echo $row['date'] . ' at ' . $row['time'] ?></p>
 

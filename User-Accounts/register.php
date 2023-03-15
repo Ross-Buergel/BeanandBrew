@@ -96,7 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div>
         <br>
         <div class="divider"></div>
-        <h1 class="standard-box-title">Register</h1>
+        <h1>Register</h1>
 
         <?php
         if (isset($errors) && !empty($errors)) {

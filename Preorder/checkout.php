@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['cart']) && isset($_
         $r = mysqli_query($dbc, $q);
 
         $order_id = mysqli_insert_id($dbc);
-        
+
         while ($row = mysqli_fetch_array($cart_items, MYSQLI_ASSOC)) {
             $collection = $_POST['date'] . ", " . $_POST['time'];
             $query = "INSERT INTO tbl_order_contents(order_id,item_id,user_id,quantity,price,location)
@@ -156,7 +156,7 @@ else :
     ?>
         <div class="standard-box">
             <div class="centre-content">
-                <h1 class="standard-box-title">There are no items in your cart</h1>
+                <h1>There are no items in your cart</h1>
             </div>
         </div>
 <?php
