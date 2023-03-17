@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $booking = mysqli_query($dbc, $booking_query);
     }
     //closes the database connection
-    mysqli_close();
+    mysqli_close($dbc);
 }
 ?>
 

@@ -72,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
         }
     }
     //closes the database connection
-    mysqli_close();
+    mysqli_close($dbc);
 }
 
 ?>
