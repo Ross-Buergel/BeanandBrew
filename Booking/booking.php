@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         //inserts the booking into the table
         $booking_query = "INSERT INTO tbl_bookings(user_id,name,time,date,people,location)
-        VALUES ('" . $user_id . "','" .
+        VALUES ('" . $_SESSION["user_id"] . "','" .
             $name . "','" .
             $_POST['time'] . "','" .
             $_POST['date'] . "','" .
@@ -73,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <div class="standard-box">
     <div>
-        <form class="centre-content" action="/Booking/booking.php" method="POST">
+        <form class="centre-content" action="booking.php" method="POST">
             <!-- Adds a heading to the page -->
             <br>
             <div class="divider"></div>

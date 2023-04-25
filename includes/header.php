@@ -8,9 +8,9 @@ session_start();
 
 <head>
   <meta charset="UTF-8">
+  <!-- Adds title to page -->
   <title>
-    <!-- Adds title to page -->
-    <?php echo $page_title; ?>
+    Bean and Brew | <?php echo $page_title; ?>
   </title>
   <!-- Includes stylesheet on page -->
   <link rel="stylesheet" href="/BeanandBrew/includes/style.css">

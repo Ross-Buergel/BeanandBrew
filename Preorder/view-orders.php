@@ -11,11 +11,13 @@ if ($_SESSION['user_id'] != "1") {
     header("Location: ../User-Accounts/login.php");
 }
 
-
 ?>
 <div class='standard-box'>
     <div class='centre-content'>
-
+        <br>
+        <div class="divider"></div>
+        <h1>View Orders</h1>
+        <div class="divider"></div>
         <?php
         //creates necessary arrays
         $graph_x_data = array();
@@ -39,7 +41,7 @@ if ($_SESSION['user_id'] != "1") {
                 //adds one to the number stored with the collection_date
                 $key = $x_data_map[$order['collection_date']];
                 $graph_y_data[$key] += 1;
-            //if date is not present in $graph_x_data array
+                //if date is not present in $graph_x_data array
             } else {
                 //adds one to count
                 $count++;
@@ -57,7 +59,6 @@ if ($_SESSION['user_id'] != "1") {
 
         ?>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <h1>View Orders</h1>
         <h2>Number of Orders for Collection per Day</h2>
         <!-- presents the graph -->
         <div style="padding-left:300px;padding-right:300px;">
@@ -117,16 +118,18 @@ if ($_SESSION['user_id'] != "1") {
                 }
             });
         </script>
-
+        <br>
+        <div class="divider"></div>
         <h2>Most Popular Items</h2>
 
         <?php
-        /* - */
+        /* - */ /*n*/
 
         //selects the most popular items over the last 7 days
-        $popular_drinks_query = "SELECT item_id, COUNT(*) AS c FROM tbl_order_contents GROUP BY item_id ORDER BY c DESC";
+        $popular_drinks_query = "SELECT item_id, COUNT(*) AS number_ordered FROM tbl_order_contents GROUP BY item_id 
+        ORDER BY number_ordered DESC LIMIT 5";
         $popular_drinks = mysqli_query($dbc, $popular_drinks_query);
-        
+
         //outputs each item
         while ($popular_drinks_array = mysqli_fetch_array($popular_drinks, MYSQLI_ASSOC)) {
             //selects item from table
@@ -141,9 +144,10 @@ if ($_SESSION['user_id'] != "1") {
                     "<img src = './" . $product_array['item_img'] . "' style = 'width:10%;height:10%;'><br>";
             }
 
-            echo $popular_drinks_array['c'] . '</p>';
+            echo $popular_drinks_array['number_ordered'] . '</p>';
         }
         ?>
+        <div class="divider"></div>
         <h2>Amount Earnt Over Time</h2>
 
         <?php
@@ -178,6 +182,7 @@ if ($_SESSION['user_id'] != "1") {
         <p>Past 24 Hours - £<?php echo $day_total; ?></p>
         <p>Past 7 Days - £<?php echo $seven_days_total; ?></p>
 
+        <div class="divider"></div>
         <h2>Orders</h2>
 
         <?php
@@ -211,7 +216,36 @@ if ($_SESSION['user_id'] != "1") {
             echo "<br>Collection : " . $order_array['collection_date'] . " " . $order_array['collection_time'] . "<br></p>";
         }
         ?>
+        <div class="divider"></div>
+        <h2>Total Orders for Each Product Over Last 7 Days</h2>
+        <div class="divider"></div>
+        <?php
+        $total_7_days_query = "SELECT order_id FROM tbl_orders WHERE order_date >= DATE(NOW()) - INTERVAL 7 DAY";
+        $total_7_days = mysqli_query($dbc, $total_7_days_query);
 
+        $total_ordered_query = "SELECT item_id, COUNT(*) AS number_ordered FROM tbl_order_contents GROUP BY item_id 
+        ORDER BY number_ordered DESC";
+        $total_ordered = mysqli_query($dbc, $total_ordered_query);
+
+        //outputs each item
+        while ($total_ordered_array = mysqli_fetch_array($total_ordered, MYSQLI_ASSOC)) {
+            //selects item from table
+            $products_query = "SELECT * FROM tbl_shop
+                    WHERE item_id = '" . $total_ordered_array["item_id"] . "'";
+            $products = mysqli_query($dbc, $products_query);
+
+            //outputs items details
+            echo '<p>';
+            while ($products_array = mysqli_fetch_array($products, MYSQLI_ASSOC)) {
+                echo $products_array['item_name'] . "<br>" .
+                    "<img src = './" . $products_array['item_img'] . "' style = 'width:10%;height:10%;'><br>";
+            }
+
+            echo $total_ordered_array['number_ordered'] . '</p>';
+        }
+
+        ?>
+        <br>
     </div>
 </div>
 <?php

@@ -73,8 +73,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <td class='standard-box-text'><?php echo $row['item_name'] ?></td>
                             <td class='standard-box-text'>
                                 <!-- Creates input box allowing user to change quantity -->
-                                <input type="text" size="3" name="qty[<?php echo $row['item_id'] ?>]" value="
-                                    <?php echo $_SESSION['cart'][$row['item_id']]['quantity'] ?>">
+                                <input type="text" size="3" name="qty[<?php echo $row['item_id'] ?>]" 
+                                value="<?php echo $_SESSION['cart'][$row['item_id']]['quantity'] ?>">
                             </td>
                             <td class='standard-box-text'><?php echo $row['item_price'] ?> = </td>
                             <td class='standard-box-text'><?php echo number_format($subtotal, 2) ?></td>
@@ -114,7 +114,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <label for="hamper">Create Hamper?</label><br>
             <input type="checkbox" id="hamper" name="hamper" value="True"><br>
             <p>Please note that drinks cannot be included in a hamper. Any drinks will be treated as a seperate order.</p>
-            
+
             <!-- Creates hidden input for total to be sent to file and submit button -->
             <input type="hidden" name="total" value="<?php echo $total ?>">
             <input type="submit" value="Checkout" class="submit-button"><br><br>
@@ -123,4 +123,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </div>
 
 <!-- Adds footer to page -->
-<?php include('../includes/footer.html');?>
+<?php include('../includes/footer.html'); ?>
